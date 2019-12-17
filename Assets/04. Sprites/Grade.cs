@@ -17,10 +17,10 @@ public class Grade : MonoBehaviour
         Vector2 nowCheck = Vector3ToVector2(GradeMgr.S.positions[checkPoint]);
         Vector2 nextCheck = Vector3ToVector2(GradeMgr.S.positions[checkPoint + 1]);
 
-        dist1 = Vector2.Distance(pos, nowCheck);
-        dist2 = Vector2.Distance(pos, nextCheck);
-        
-        if(dist2 < dist1) {
+        dist1 = (pos - nowCheck).sqrMagnitude;
+        dist2 = (pos - nextCheck).sqrMagnitude;
+
+        if (dist2 < dist1) {
             CheckPointUp();
         }
     }
