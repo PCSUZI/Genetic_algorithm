@@ -1542,6 +1542,7 @@ GameObject:
   - component: {fileID: 147901031}
   - component: {fileID: 147901032}
   - component: {fileID: 1922178634}
+  - component: {fileID: 1922178636}
   m_Layer: 0
   m_Name: vehicle
   m_TagString: Untagged
@@ -1562,6 +1563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxDistance: 1
+  m_speed: 1
 --- !u!1 &1922178635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1582,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1922178636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922178633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fabbf90a702dfa14ebc39ef5b538a4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1922178637
 GameObject:
   m_ObjectHideFlags: 0
