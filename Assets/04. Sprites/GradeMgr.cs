@@ -77,7 +77,7 @@ public class GradeMgr : MonoBehaviour
     void DrawLine() {
         int childCnt = transform.childCount;
 
-        if (childCnt < 3)
+        if (childCnt < 2)
             return;
 
         positions = new Vector3[childCnt];
