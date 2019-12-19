@@ -38,6 +38,11 @@ public class GradeMgr : MonoBehaviour
         MVPMarker();
     }
 
+    public void Reset() {
+        foreach (var i in objs)
+            i.checkPoint = 0;
+    }
+
     private void Init() {
         maxGrades = new List<Grade>(objs);
     }
@@ -50,8 +55,8 @@ public class GradeMgr : MonoBehaviour
         float min = 10000;
         Grade obj = null;
 
-        foreach(var i in maxGrades) {
-            if(i.dist2 < min) {
+        foreach (var i in maxGrades) {
+            if (i.dist2 < min) {
                 min = i.dist2;
                 obj = i;
             }
@@ -61,7 +66,7 @@ public class GradeMgr : MonoBehaviour
     }
 
     public void GradeChanged(int check, Grade obj) {
-        if(maxCheck > check)
+        if (maxCheck > check)
             return;
 
         if (maxCheck == check) {
@@ -77,7 +82,7 @@ public class GradeMgr : MonoBehaviour
     void DrawLine() {
         int childCnt = transform.childCount;
 
-        if (childCnt < 2)
+        if (childCnt < 3)
             return;
 
         positions = new Vector3[childCnt];
@@ -89,4 +94,5 @@ public class GradeMgr : MonoBehaviour
         line.positionCount = childCnt;
         line.SetPositions(positions);
     }
+
 }
