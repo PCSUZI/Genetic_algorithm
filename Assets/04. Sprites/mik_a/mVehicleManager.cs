@@ -16,8 +16,7 @@ public class mVehicleManager : MonoBehaviour
         S = this;
     }
 
-    void Start()
-    {
+    void Start() {
         CreateVehicles();
         Init();
     }
@@ -28,8 +27,8 @@ public class mVehicleManager : MonoBehaviour
             mVehicle mv = Instantiate(vehiclePrefab, transform.position, Quaternion.identity, parent.transform);
             mVehicles.Add(mv);
         }
+        GradeMgr.S.FindGrades();
     }
-
 
     public void VehicleDead(mVehicle vehicle) {
         aliveVehicles.Remove(vehicle);
@@ -41,10 +40,11 @@ public class mVehicleManager : MonoBehaviour
 
     void Init() {
         aliveVehicles = new List<mVehicle>(mVehicles);
-        GradeMgr.S.Reset();
         foreach (var i in mVehicles) {
             i.transform.position = transform.position;
             i.isAlive = true;
+            i.geneticStats = new GeneticStats();
         }
+        GradeMgr.S.Reset();
     }
 }
