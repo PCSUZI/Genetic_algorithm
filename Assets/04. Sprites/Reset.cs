@@ -6,20 +6,36 @@ public class Reset : MonoBehaviour
 {
     Transform tr;
 
-    Vector3 m_startPos;
-    Vector3 m_startRot;
+    Vector3 startPos;
+    Vector3 startRot;
+
    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         tr = gameObject.GetComponent<Transform>();
-        m_startPos = tr.position;
-        m_startRot = tr.rotation.eulerAngles;
+        startPos = tr.position;
+        startRot = tr.rotation.eulerAngles;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        tr.position = m_startPos;
-        tr.rotation = Quaternion.Euler(m_startRot);
+        if (other.tag == "wall")
+        {
+            gameObject.SetActive(false);
+            GradeMgr.S.dieCheck += 1;
+        }
+    }
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    void Init()
+    {
+        tr.position = startPos;
+        tr.rotation = Quaternion.Euler(startRot);
     }
 }

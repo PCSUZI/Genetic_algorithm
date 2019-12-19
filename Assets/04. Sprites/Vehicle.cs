@@ -4,63 +4,122 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    RaycastHit hit;
-    public float m_maxDistance = 2f;
-    public float m_speed = 1.0f;
+    #region Genetic
+    public float minSpeed = 1;
+    public float maxSpeed = 3;
+    public float speedDisMax = 10;
 
-    Transform tr;
+    public float minRotPower = 0;
+    public float maxRotPower = 100;
+    public float rotDistMax = 10;
+    #endregion
 
-    Vector3 m_Rvector = new Vector3(1, 0, 1);
-    Vector3 m_Lvector = new Vector3(-1, 0, 1);
+    #region Status
+    public float speed = 1;
+    public float rotPower = 1;
 
-    public float m_forwardDistance = 10.0f;
-    public Vector3 m_rotTemp=new Vector3(0,0,0);
+    public float minSpeedNow = 3;
+    public float maxSpeedNow = 1;
+    public float minRotPowerNow = 100;
+    public float maxRotPowerNow = 0;
+    #endregion
 
-    private void Start()
+    #region Ray
+    Ray forwardRay;
+    Ray rightRay;
+    Ray leftRay;
+
+    float forwardDist;
+    float rightDist;
+    float leftDist;
+    #endregion
+
+    private void OnEnable()
     {
-        tr = gameObject.GetComponent<Transform>();
+        minSpeedNow = maxSpeed;
+        maxSpeedNow = minSpeed;
+        minRotPowerNow = maxRotPower;
+        maxRotPowerNow = minRotPower;
+        
     }
+
     // Update is called once per frame
     void Update()
     {
-        Ray();
-
-
-        if(m_forwardDistance<1.0f)
-        {
-          //  tr.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
-
-          //  m_rotTemp.y = Random.Range(0.0f, 360.0f);
-
-         //   tr.Rotate(m_rotTemp);
-        }
-        else
-        {
-             tr.position += tr.forward * Time.deltaTime * m_speed;
-        }
-
+        RayUpdate();
+        Accel();
+        Rotate();
     }
 
-    void Ray()
+    void Accel()
     {
-        Debug.DrawRay(tr.position, tr.forward * m_maxDistance, Color.blue);
-        Debug.DrawRay(tr.position, (tr.forward+tr.right) * m_maxDistance, Color.red);
-        Debug.DrawRay(tr.position, (tr.forward+-tr.right) * m_maxDistance, Color.green);
 
-        if (Physics.Raycast(tr.position, tr.forward, out hit))
-        {
-            m_forwardDistance = Vector3.Distance(hit.point, tr.position);
-        }
+        speed = Mathf.Lerp(minSpeed, maxSpeed, forwardDist / speedDisMax);
+        transform.Translate(transform.forward * speed * Time.deltaTime);
 
-        if (Physics.Raycast(tr.position, (tr.forward + tr.right), out hit, m_maxDistance))
-        {
-            Debug.Log("오 : " + Vector3.Distance(hit.point, tr.position));
-        }
+        if (speed < minSpeedNow)
+            minSpeedNow = speed;
 
-        if (Physics.Raycast(tr.position, (tr.forward + -tr.right), out hit, m_maxDistance))
-        {
-            Debug.Log("왼 : " + Vector3.Distance(hit.point, tr.position));
-        }
+        if (speed > maxSpeedNow)
+            maxSpeedNow = speed;
     }
+
+    void Rotate()
+    {
+        int dir = rightDist > leftDist ? 1 : -1;
+        float dist = rightDist > leftDist ? leftDist : rightDist;
+
+        rotPower = Mathf.Lerp(maxRotPower, minRotPower, dist / rotDistMax);
+        transform.Rotate(Vector3.up * Time.deltaTime * dir * rotPower);
+
+
+        if (rotPower < minRotPowerNow)
+            minRotPower = rotPower;
+
+        if (rotPower > maxRotPowerNow)
+            maxRotPower = rotPower;
+    }
+
+    void RayUpdate()
+    {
+        forwardRay.origin = transform.position;
+        forwardRay.direction = transform.forward;
+
+        rightRay.origin = transform.position;
+        rightRay.direction = transform.forward+transform.right;
+
+        leftRay.origin = transform.position;
+        leftRay.direction = transform.forward -transform.right;
+
+        DrawRay(forwardRay);
+        DrawRay(rightRay);
+        DrawRay(leftRay);
+
+        GetRayDist(forwardRay, out forwardDist);
+        GetRayDist(rightRay, out rightDist);
+        GetRayDist(leftRay, out leftDist);
+    }
+
+    void DrawRay(Ray ray)
+    {
+        Debug.DrawRay(ray.origin, ray.direction, Color.white);
+    }
+
+
+
+    void GetRayDist(Ray ray, out float _dist)
+    {
+        RaycastHit hit;
+
+        _dist = Mathf.Infinity;
+
+        if (Physics.Raycast(ray,out hit,Mathf.Infinity))
+        {
+            _dist = Vector3.Distance(transform.position, hit.point);
+        }
+
+    }
+
+
 
 }
