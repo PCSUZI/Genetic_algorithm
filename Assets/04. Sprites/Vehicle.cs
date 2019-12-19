@@ -7,10 +7,6 @@ public class Vehicle : MonoBehaviour
     RaycastHit hit;
     public float MaxDistance = 2f;
 
-    public float x = 1;
-    public float y = 1;
-    public float z = 1;
-
     Transform tr;
 
     Vector3 m_Rvector = new Vector3(1, 0, 1);

@@ -38,6 +38,11 @@ public class GradeMgr : MonoBehaviour
         MVPMarker();
     }
 
+    public void Reset() {
+        foreach (var i in objs)
+            i.checkPoint = 0;
+    }
+
     private void Init() {
         maxGrades = new List<Grade>(objs);
     }
@@ -89,4 +94,5 @@ public class GradeMgr : MonoBehaviour
         line.positionCount = childCnt;
         line.SetPositions(positions);
     }
+
 }

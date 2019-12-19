@@ -13,9 +13,9 @@ public class Grade : MonoBehaviour
     }
 
     void DistCal( ) {
-        Vector2 pos = Vector3ToVector2(transform.position);
-        Vector2 nowCheck = Vector3ToVector2(GradeMgr.S.positions[checkPoint]);
-        Vector2 nextCheck = Vector3ToVector2(GradeMgr.S.positions[checkPoint + 1]);
+        Vector2 pos          = Utils.S.Vector3ToVector2(transform.position);
+        Vector2 nowCheck = Utils.S.Vector3ToVector2(GradeMgr.S.positions[checkPoint]);
+        Vector2 nextCheck = Utils.S.Vector3ToVector2(GradeMgr.S.positions[checkPoint + 1]);
 
         dist1 = (pos - nowCheck).sqrMagnitude;
         dist2 = (pos - nextCheck).sqrMagnitude;
@@ -28,9 +28,5 @@ public class Grade : MonoBehaviour
     void CheckPointUp() {
         checkPoint++;
         GradeMgr.S.GradeChanged(checkPoint, this);
-    }
-
-    Vector2 Vector3ToVector2(Vector3 vec3) {
-        return new Vector2(vec3.x, vec3.z);
     }
 }
