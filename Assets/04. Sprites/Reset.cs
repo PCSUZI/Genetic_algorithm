@@ -24,7 +24,7 @@ public class Reset : MonoBehaviour
         if (other.tag == "wall")
         {
             gameObject.SetActive(false);
-            GradeMgr.S.dieCheck += 1;
+            VehicleMgr.S.dieCheck += 1;
         }
     }
 

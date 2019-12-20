@@ -2517,7 +2517,6 @@ MonoBehaviour:
   - {fileID: 607745915}
   - {fileID: 1922178636}
   topObj: {fileID: 420863362}
-  dieCheck: 0
 --- !u!4 &1642993795
 Transform:
   m_ObjectHideFlags: 0
@@ -2546,7 +2545,7 @@ Transform:
   - {fileID: 39974548}
   - {fileID: 435178847}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687999563
 GameObject:
@@ -3485,7 +3484,7 @@ Transform:
   - {fileID: 420863361}
   - {fileID: 607745914}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1995597508
 GameObject:
@@ -3866,7 +3865,7 @@ GameObject:
   - component: {fileID: 2101715821}
   - component: {fileID: 2101715822}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: VehicleMgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3884,7 +3883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2101715822
 MonoBehaviour:
@@ -3895,9 +3894,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101715820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3988d16ca719f79428712e154be35480, type: 3}
+  m_Script: {fileID: 11500000, guid: ea627909dd1a0524c9014aaad4cecfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objs: []
+  topObj: {fileID: 0}
+  dieCheck: 0
 --- !u!1 &2111963813
 GameObject:
   m_ObjectHideFlags: 0

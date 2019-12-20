@@ -18,7 +18,6 @@ public class GradeMgr : MonoBehaviour
     int maxCheck = 0;
     List<Grade> maxGrades = new List<Grade>();
 
-    public int dieCheck = 0;
 
     private void Awake() {
         S = this;
@@ -38,44 +37,21 @@ public class GradeMgr : MonoBehaviour
         DrawLine();
         GradeCalc();
         MVPMarker();
-        Genetic();
     }
 
-    public void Reset() {
+    public void Reset()
+    {
+        maxCheck = 0;
         foreach (var i in objs)
+        {
             i.checkPoint = 0;
+        }
     }
 
     private void Init() {
         maxGrades = new List<Grade>(objs);
     }
       
-    void Genetic()
-    {
-        int count = objs.Length;
-        Vehicle parentObj = topObj.GetComponent<Vehicle>();
-
-        if(dieCheck==count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                Vehicle obj = objs[i].GetComponent<Vehicle>();
-                obj.minSpeed = parentObj.minSpeedNow;
-                obj.maxSpeed = parentObj.maxSpeedNow;
-                obj.minRotPower = parentObj.minRotPowerNow;
-                obj.maxRotPower = parentObj.maxRotPowerNow;
-            }
-
-            for (int i = 0; i < count; i++)
-            {
-                objs[i].gameObject.SetActive(true);
-            }
-
-            dieCheck = 0;
-
-        }
-
-    }
 
     void MVPMarker() {
         mvpMarker.transform.position = topObj.transform.position;

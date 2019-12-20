@@ -40,7 +40,13 @@ public class Vehicle : MonoBehaviour
         maxSpeedNow = minSpeed;
         minRotPowerNow = maxRotPower;
         maxRotPowerNow = minRotPower;
-        
+
+    }
+
+    private void Start()
+    {
+        maxSpeed = Random.Range(1, 100);
+        maxRotPower = Random.Range(0, 100);
     }
 
     // Update is called once per frame
@@ -53,9 +59,8 @@ public class Vehicle : MonoBehaviour
 
     void Accel()
     {
-
         speed = Mathf.Lerp(minSpeed, maxSpeed, forwardDist / speedDisMax);
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         if (speed < minSpeedNow)
             minSpeedNow = speed;
@@ -69,15 +74,15 @@ public class Vehicle : MonoBehaviour
         int dir = rightDist > leftDist ? 1 : -1;
         float dist = rightDist > leftDist ? leftDist : rightDist;
 
-        rotPower = Mathf.Lerp(maxRotPower, minRotPower, dist / rotDistMax);
+        rotPower = Mathf.Lerp(maxRotPower, minRotPower, dist*3 / rotDistMax);
         transform.Rotate(Vector3.up * Time.deltaTime * dir * rotPower);
 
 
         if (rotPower < minRotPowerNow)
-            minRotPower = rotPower;
+            minRotPowerNow = rotPower;
 
         if (rotPower > maxRotPowerNow)
-            maxRotPower = rotPower;
+            maxRotPowerNow = rotPower;
     }
 
     void RayUpdate()
@@ -86,10 +91,10 @@ public class Vehicle : MonoBehaviour
         forwardRay.direction = transform.forward;
 
         rightRay.origin = transform.position;
-        rightRay.direction = transform.forward+transform.right;
+        rightRay.direction = transform.forward + transform.right;
 
         leftRay.origin = transform.position;
-        leftRay.direction = transform.forward -transform.right;
+        leftRay.direction = transform.forward - transform.right;
 
         DrawRay(forwardRay);
         DrawRay(rightRay);
@@ -113,7 +118,7 @@ public class Vehicle : MonoBehaviour
 
         _dist = Mathf.Infinity;
 
-        if (Physics.Raycast(ray,out hit,Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             _dist = Vector3.Distance(transform.position, hit.point);
         }
