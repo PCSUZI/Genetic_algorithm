@@ -30,9 +30,9 @@ public class mVehicle : MonoBehaviour
 
     private void Start() {
         geneticStats = new GeneticStats();
-        layer = LayerMask.NameToLayer("Wall");
-
+        layer = 1 << LayerMask.NameToLayer("Wall");
     }
+
     private void FixedUpdate() {
         if (!isAlive)
             return;
