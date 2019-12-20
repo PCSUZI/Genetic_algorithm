@@ -29,6 +29,15 @@ public class GradeMgr : MonoBehaviour
     private void Start() {
         line = GetComponent<LineRenderer>();
         Init();
+
+
+         if (Application.isPlaying) {
+            line.enabled = false;
+        }
+         else {
+            line.enabled = true;
+        }
+
     }
 
     public void FindGrades() {
