@@ -7,6 +7,8 @@ public class mVehicle : MonoBehaviour
 {
     public GeneticStats geneticStats;
 
+    int layer;
+
     #region Status
     [Header("Status")]
     float speed = 1;
@@ -28,6 +30,7 @@ public class mVehicle : MonoBehaviour
 
     private void Start() {
         geneticStats = new GeneticStats();
+        layer = LayerMask.NameToLayer("Wall");
 
     }
     private void FixedUpdate() {
@@ -80,7 +83,7 @@ public class mVehicle : MonoBehaviour
     void GetRayDist(Ray ray, out float _dist) {
         RaycastHit hit;
         _dist = Mathf.Infinity;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer)) {
             _dist = (transform.position - hit.point).sqrMagnitude;
         }
     }
