@@ -20,6 +20,8 @@ public class Grade : MonoBehaviour
         dist1 = (pos - nowCheck).sqrMagnitude;
         dist2 = (pos - nextCheck).sqrMagnitude;
 
+        float dist3 = (nowCheck - nextCheck).sqrMagnitude;
+
         if (dist2 < dist1) {
             CheckPointUp();
         }
