@@ -15,7 +15,7 @@ public class GradeMgr : MonoBehaviour
     public Grade[] objs;
     public Grade topObj;
 
-    int maxCheck = 0;
+    public int maxCheck = 0;
     List<Grade> maxGrades = new List<Grade>();
 
     private void Awake() {
@@ -28,9 +28,13 @@ public class GradeMgr : MonoBehaviour
 
     private void Start() {
         line = GetComponent<LineRenderer>();
-        objs = FindObjectsOfType<Grade>();
         Init();
     }
+
+    public void FindGrades() {
+        objs = FindObjectsOfType<Grade>();
+    }
+
 
     private void Update() {
         DrawLine();
@@ -48,7 +52,8 @@ public class GradeMgr : MonoBehaviour
     }
 
     void MVPMarker() {
-        mvpMarker.transform.position = topObj.transform.position;
+        if(topObj)
+            mvpMarker.transform.position = topObj.transform.position;
     }
 
     public void GradeCalc() {

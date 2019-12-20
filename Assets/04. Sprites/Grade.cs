@@ -13,14 +13,14 @@ public class Grade : MonoBehaviour
     }
 
     void DistCal( ) {
-        Vector2 pos = Vector3ToVector2(transform.position);
-        Vector2 nowCheck = Vector3ToVector2(GradeMgr.S.positions[checkPoint]);
-        Vector2 nextCheck = Vector3ToVector2(GradeMgr.S.positions[checkPoint + 1]);
+        Vector2 pos          = Utils.S.Vector3ToVector2(transform.position);
+        Vector2 nowCheck = Utils.S.Vector3ToVector2(GradeMgr.S.positions[(int)Mathf.Repeat(checkPoint, GradeMgr.S.positions.Length)]);
+        Vector2 nextCheck = Utils.S.Vector3ToVector2(GradeMgr.S.positions[(int)Mathf.Repeat(checkPoint + 1, GradeMgr.S.positions.Length)]);
 
-        dist1 = Vector2.Distance(pos, nowCheck);
-        dist2 = Vector2.Distance(pos, nextCheck);
-        
-        if(dist2 < dist1) {
+        dist1 = (pos - nowCheck).sqrMagnitude;
+        dist2 = (pos - nextCheck).sqrMagnitude;
+
+        if (dist2 < dist1) {
             CheckPointUp();
         }
     }
@@ -28,9 +28,5 @@ public class Grade : MonoBehaviour
     void CheckPointUp() {
         checkPoint++;
         GradeMgr.S.GradeChanged(checkPoint, this);
-    }
-
-    Vector2 Vector3ToVector2(Vector3 vec3) {
-        return new Vector2(vec3.x, vec3.z);
     }
 }

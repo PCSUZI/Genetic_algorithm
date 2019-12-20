@@ -5,8 +5,7 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour
 {
     RaycastHit hit;
-    public float m_maxDistance = 2f;
-    public float m_speed = 1.0f;
+    public float MaxDistance = 2f;
 
     Transform tr;
 
