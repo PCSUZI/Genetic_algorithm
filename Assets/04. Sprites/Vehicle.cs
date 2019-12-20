@@ -17,11 +17,6 @@ public class Vehicle : MonoBehaviour
     #region Status
     public float speed = 1;
     public float rotPower = 1;
-
-    public float minSpeedNow = 3;
-    public float maxSpeedNow = 1;
-    public float minRotPowerNow = 100;
-    public float maxRotPowerNow = 0;
     #endregion
 
     #region Ray
@@ -34,18 +29,10 @@ public class Vehicle : MonoBehaviour
     float leftDist;
     #endregion
 
-    private void OnEnable()
-    {
-        minSpeedNow = maxSpeed;
-        maxSpeedNow = minSpeed;
-        minRotPowerNow = maxRotPower;
-        maxRotPowerNow = minRotPower;
-
-    }
 
     private void Start()
     {
-        maxSpeed = Random.Range(1, 100);
+        maxSpeed = Random.Range(1, 10);
         maxRotPower = Random.Range(0, 100);
     }
 
@@ -61,12 +48,6 @@ public class Vehicle : MonoBehaviour
     {
         speed = Mathf.Lerp(minSpeed, maxSpeed, forwardDist / speedDisMax);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-        if (speed < minSpeedNow)
-            minSpeedNow = speed;
-
-        if (speed > maxSpeedNow)
-            maxSpeedNow = speed;
     }
 
     void Rotate()
@@ -74,15 +55,8 @@ public class Vehicle : MonoBehaviour
         int dir = rightDist > leftDist ? 1 : -1;
         float dist = rightDist > leftDist ? leftDist : rightDist;
 
-        rotPower = Mathf.Lerp(maxRotPower, minRotPower, dist*3 / rotDistMax);
+        rotPower = Mathf.Lerp(maxRotPower, minRotPower, dist / rotDistMax);
         transform.Rotate(Vector3.up * Time.deltaTime * dir * rotPower);
-
-
-        if (rotPower < minRotPowerNow)
-            minRotPowerNow = rotPower;
-
-        if (rotPower > maxRotPowerNow)
-            maxRotPowerNow = rotPower;
     }
 
     void RayUpdate()

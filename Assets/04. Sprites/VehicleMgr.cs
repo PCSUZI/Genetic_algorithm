@@ -40,10 +40,10 @@ public class VehicleMgr : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 Vehicle obj = objs[i].GetComponent<Vehicle>();
-                obj.minSpeed = Random.Range(topObj.minSpeedNow,3);
-                obj.maxSpeed = Random.Range(1, topObj.maxSpeedNow);
-                obj.minRotPower =Random.Range(topObj.minRotPowerNow,100);
-                obj.maxRotPower = Random.Range(0,topObj.maxRotPowerNow);
+                obj.minSpeed = Mathf.Clamp(topObj.minSpeed + Random.Range(-1f, 1f), 0.1f, Mathf.Infinity);
+                obj.maxSpeed = Mathf.Clamp(topObj.maxSpeed + Random.Range(-1f, 1f), topObj.minSpeed, Mathf.Infinity);
+                obj.minRotPower = Mathf.Clamp(topObj.minRotPower + Random.Range(-1f, 1f), 0.1f, Mathf.Infinity);
+                obj.maxRotPower = Mathf.Clamp(topObj.maxRotPower + Random.Range(-1f, 1f), topObj.minRotPower, Mathf.Infinity);
             }
 
             for (int i = 0; i < count; i++)
