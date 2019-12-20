@@ -26,6 +26,10 @@ public class mVehicle : MonoBehaviour
 
     public bool isAlive = true;
 
+    private void Start() {
+        geneticStats = new GeneticStats();
+
+    }
     private void FixedUpdate() {
         if (!isAlive)
             return;
@@ -37,7 +41,7 @@ public class mVehicle : MonoBehaviour
 
     void Accel() {
         speed = Mathf.Lerp(geneticStats.minSpeed, geneticStats.maxSpeed, forwardDist / geneticStats.speedDistMax);
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     void Rotate() {

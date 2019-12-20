@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class mVehicleManager : MonoBehaviour
 {
+    public int generation = 0;
+    public Text genText;
+
     public static mVehicleManager S;
 
     public List<mVehicle> mVehicles = new List<mVehicle>();
@@ -38,12 +42,26 @@ public class mVehicleManager : MonoBehaviour
         }
     }
 
+    public void KillAllVehicels() {
+        aliveVehicles.Clear();
+        Init();
+    }
+
     void Init() {
+        genText.text = (++generation).ToString();
+
         aliveVehicles = new List<mVehicle>(mVehicles);
+        mVehicle top = GradeMgr.S.topObj ? GradeMgr.S.topObj.GetComponent<mVehicle>() : null;
+
         foreach (var i in mVehicles) {
             i.transform.position = transform.position;
+            i.transform.rotation = Quaternion.identity;
             i.isAlive = true;
-            i.geneticStats = new GeneticStats();
+
+            if (top)
+                i.geneticStats = new GeneticStats(top);
+            else
+                i.geneticStats = new GeneticStats();
         }
         GradeMgr.S.Reset();
     }

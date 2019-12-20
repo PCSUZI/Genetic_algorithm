@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
 public class GeneticStats {
-    public float minSpeed;
-    public float maxSpeed;
-    public float speedDistMax ;
+    public float minSpeed = Random.Range(1, 10);
+    public float maxSpeed = Random.Range(1, 10);
+    public float speedDistMax = Random.Range(1, 10);
 
-    public float minRotPower;
-    public float maxRotPower;
-    public float rotDistMax;
+    public float minRotPower = Random.Range(1, 100);
+    public float maxRotPower = Random.Range(1, 100);
+    public float rotDistMax = Random.Range(1, 10);
 
     public GeneticStats() {
         minSpeed = Random.Range(1, 10);
@@ -21,5 +21,13 @@ public class GeneticStats {
 
     public GeneticStats(mVehicle vehicle) {
         GeneticStats stats = vehicle.geneticStats;
+
+        minSpeed = Mathf.Clamp(stats.minSpeed + Random.Range(-1f, 1f), 0.1f, Mathf.Infinity);
+        maxSpeed = Mathf.Clamp(stats.maxSpeed + Random.Range(-1f, 1f), minSpeed, Mathf.Infinity);
+        speedDistMax = Mathf.Clamp(stats.speedDistMax + Random.Range(-1f, 1f), 0.1f, Mathf.Infinity);
+
+        minRotPower = Mathf.Clamp(stats.minRotPower + Random.Range(-1f, 1f), 0.1f, Mathf.Infinity);
+        maxRotPower = Mathf.Clamp(stats.maxRotPower + Random.Range(-1f, 1f), minRotPower, Mathf.Infinity);
+        rotDistMax = Mathf.Clamp(stats.rotDistMax + Random.Range(-1f, 1f), 0.1f, Mathf.Infinity);
     }
 }

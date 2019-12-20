@@ -54,7 +54,8 @@ public class GradeMgr : MonoBehaviour
     }
 
     void MVPMarker() {
-        mvpMarker.transform.position = topObj.transform.position;
+        if(topObj)
+            mvpMarker.transform.position = topObj.transform.position;
     }
 
     public void GradeCalc() {
