@@ -43,10 +43,8 @@ public class GradeMgr : MonoBehaviour
     }
 
     public void Reset() {
-        maxCheck = 0;
-        foreach (var i in objs) {
+        foreach (var i in objs)
             i.checkPoint = 0;
-        }
     }
 
     private void Init() {
@@ -62,8 +60,8 @@ public class GradeMgr : MonoBehaviour
         float min = 10000;
         Grade obj = null;
 
-        foreach(var i in maxGrades) {
-            if(i.dist2 < min) {
+        foreach (var i in maxGrades) {
+            if (i.dist2 < min) {
                 min = i.dist2;
                 obj = i;
             }
@@ -73,7 +71,7 @@ public class GradeMgr : MonoBehaviour
     }
 
     public void GradeChanged(int check, Grade obj) {
-        if(maxCheck > check)
+        if (maxCheck > check)
             return;
 
         if (maxCheck == check) {
