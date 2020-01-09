@@ -27,6 +27,8 @@ public class Vehicle : MonoBehaviour
     float forwardDist;
     float rightDist;
     float leftDist;
+
+    int layer;
     #endregion
 
 
@@ -34,6 +36,8 @@ public class Vehicle : MonoBehaviour
     {
         maxSpeed = Random.Range(1, 10);
         maxRotPower = Random.Range(0, 100);
+
+        layer = 1 << LayerMask.NameToLayer("Wall");
     }
 
     // Update is called once per frame
@@ -92,7 +96,7 @@ public class Vehicle : MonoBehaviour
 
         _dist = Mathf.Infinity;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
         {
             _dist = Vector3.Distance(transform.position, hit.point);
         }

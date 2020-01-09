@@ -21,6 +21,7 @@ public class VehicleMgr : MonoBehaviour
     void Start()
     {
         objs = FindObjectsOfType<Vehicle>();
+        GradeMgr.S.FindGrades();
     }
 
     // Update is called once per frame
